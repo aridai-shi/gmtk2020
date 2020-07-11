@@ -34,9 +34,10 @@ func get_input():
 func _physics_process(delta):
 	if controllable:
 		get_input()
-		if Input.is_action_pressed("ui_select") && dash:
+		if $CoolTimer.time_left <= 0 && Input.is_action_pressed("ui_select") && dash:
 			dash = false
 			$DashTimer.start(0.08)
+			$CoolTimer.start(0.5)
 		if jumping and is_on_floor():
 			jumping = false
 		if $DashTimer.time_left > 0:
@@ -45,8 +46,10 @@ func _physics_process(delta):
 			else:
 				velocity.x = -4 * run_speed
 			velocity.y = 0
+			$DashDust.emitting = true
 		else:
 			velocity.y += gravity * delta
+			$DashDust.emitting = false
 		if $CoyoteTimer.time_left > 0:
 			dash = true
 		velocity = move_and_slide(velocity, Vector2(0, -1))
