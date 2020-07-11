@@ -1,4 +1,4 @@
-extends Node
+extends TileMap
 
 var toggle = true
 
@@ -21,9 +21,11 @@ func on_beat():
 func _process(delta):
 
 	if toggle:
-		$CollisionShape2D.disabled = true
-		$Sprite.modulate = Color(0.34,0.34,0.34)
+		collision_layer = 20
+		collision_mask = 20
+		modulate = Color("575757")
 	else:
-		$CollisionShape2D.disabled = false
-		$Sprite.modulate = Color(1,1,1)
+		collision_layer = 1
+		collision_mask = 1
+		modulate = Color("ffffff")
 
