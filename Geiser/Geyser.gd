@@ -15,17 +15,22 @@ func _ready():
 		val = 1
 	scale.x = val
 	get_owner().get_parent().get_node("./BeatPlayer").connect("beat",self,"on_beat")
-	$GeyserTimer.connect("timeout",self,"on_geyser_timer_timeout")
 
 func on_beat():
-	$GeyserTimer.start()
-	$SteamParticles.emitting = true
-	$Area/Shape.disabled = true
+	$GeyserTimer.start(0.5)
 
-func on_geyser_timer_timeout():
-	$SteamParticles.emitting = false
-	$Area/Shape.disabled = false
+
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
-#func _process(delta):
-#	pass
+func _physics_process(delta):
+	if $GeyserTimer.time_left > 0:
+			$SteamParticles.emitting = true
+			$Area/Shape.disabled = false
+	else:
+			$SteamParticles.emitting = false
+			$Area/Shape.disabled = true
+			
+
+func _on_Area_body_entered(body):
+	if "Player" in body.name:
+		body.Die()
