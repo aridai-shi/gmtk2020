@@ -4,15 +4,12 @@ const COMPENSATE_HZ = 60.0
 export (int) var BPM
 const BARS = 4
 var time = 0.0
+signal beat
 func _physics_process(delta):
 	time = get_playback_position() + AudioServer.get_time_since_last_mix() - AudioServer.get_output_latency() + (1 / COMPENSATE_HZ) * COMPENSATE_FRAMES
-	
-func Beat():
 	var beaty = time * BPM / 60
-	if beaty - floor(beaty) <= 0.2: 
-		return true
-	else:
-		return false
+	if beaty - floor(beaty) <= 0.2:
+		emit_signal("beat")
 func GiveBeatCalc():
 	var beaty = time * BPM / 60
 	return float(beaty - floor(beaty))
