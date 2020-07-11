@@ -8,18 +8,18 @@ var toggle = true
 
 
 # Called when the node enters the scene tree for the first time.
+
 func _ready():
-	pass # Replace with function body.
+		get_owner().get_parent().get_node("./BeatPlayer").connect("beat",self,"on_beat")
 
-
+func on_beat():
+	if toggle:
+			toggle = false
+	else:
+			toggle = true
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
-	if get_owner().get_parent().get_node("./BeatPlayer").Beat():
-		if toggle:
-			toggle = false
-		else:
-			toggle = true
-	
+
 	if toggle:
 		$CollisionShape2D.disabled = true
 		$Sprite.modulate = Color(0.34,0.34,0.34)
