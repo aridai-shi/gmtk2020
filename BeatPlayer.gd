@@ -15,10 +15,9 @@ func Beat():
 		return false
 
 func _ready():
-	if stream == null: 
-		print ("ERROR: Forgot to add a song to the level, ya dingus.")
-		return
+	if "placeholder" in stream.resource_path: 
+		print ("WARNING: Forgot to add a song to the level, ya dingus. Song is now \"placeholder.ogg\"")
 	if BPM == null:
-		print ("ERROR: Forgot to set BPM, ya dunce. Setting to 60.")
+		print ("WARNING: Forgot to set BPM, ya dunce. Setting to 60.")
 	if !playing:
 		return
