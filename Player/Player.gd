@@ -53,8 +53,18 @@ func _physics_process(delta):
 		if $CoyoteTimer.time_left > 0:
 			dash = true
 		velocity = move_and_slide(velocity, Vector2(0, -1))
+		
 		if velocity.y > 800:
-			var game = get_owner().get_parent()
-			game.transition_level(game.levellist[game.currentlevel])
-			visible = false
-			velocity.y = 0
+			Die()
+		for i in get_slide_count():
+			var collision = get_slide_collision(i)
+			if collision.collider.is_in_group("myurderer"):
+				Die()
+			
+func Die():
+		var game = get_owner().get_parent()
+		game.transition_level(game.levellist[game.currentlevel])
+		visible = false
+		$CollisionShape2D.disabled
+		controllable = false
+		velocity.y = 0

@@ -65,6 +65,7 @@ one_shot = true
 modulate = Color( 1, 1, 1, 0.615686 )
 position = Vector2( -1, 4 )
 scale = Vector2( 0.5, 0.5 )
+emitting = false
 amount = 7
 lifetime = 0.4
 explosiveness = 0.9
