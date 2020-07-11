@@ -34,6 +34,8 @@ func get_input():
 func _physics_process(delta):
 	if controllable:
 		get_input()
+		if $Camera2D.global_position.y > 100:
+			$Camera2D.global_position.y = 100
 		if $CoolTimer.time_left <= 0 && Input.is_action_pressed("ui_select") && dash:
 			dash = false
 			$DashTimer.start(0.08)
@@ -54,7 +56,7 @@ func _physics_process(delta):
 			dash = true
 		velocity = move_and_slide(velocity, Vector2(0, -1))
 		
-		if velocity.y > 800:
+		if global_position.y > 300:
 			Die()
 		for i in get_slide_count():
 			var collision = get_slide_collision(i)
