@@ -26,4 +26,4 @@ func _process(delta):
 	else:
 		$CollisionShape2D.disabled = false
 		$Sprite.modulate = Color(1,1,1)
-	print(toggle)
+
