@@ -1,11 +1,11 @@
 extends KinematicBody2D
 
-export (int) var run_speed = 125
-export (int) var jump_speed = -290
-export (int) var gravity = 610
+export (int) var run_speed = 175
+export (int) var jump_speed = -240
+export (int) var gravity = 650
 export (bool) var controllable = true
-export (float) var h_frict_damp = 0.3
-export (float) var accel = 0.05
+export (float) var h_frict_damp = 0.2
+export (float) var accel = 0.075
 var velocity = Vector2()
 var jumping = false
 
