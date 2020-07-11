@@ -8,6 +8,7 @@ export (float) var h_frict_damp = 0.2
 export (float) var accel = 0.075
 var velocity = Vector2()
 var jumping = false
+var dash = true;
 
 
 func get_input():
@@ -24,17 +25,30 @@ func get_input():
 		$AnimatedSprite.flip_h = false
 	if horiz < 0:
 		velocity.x -= accel*run_speed
-		$AnimatedSprite.flip_h = true
-	velocity.x = clamp(velocity.x, -run_speed, run_speed)
+		$AnimatedSprite.flip_h = true	
+	if $DashTimer.time_left <= 0:
+		velocity.x = clamp(velocity.x, -run_speed, run_speed)
 	if horiz == 0:
 		velocity.x = h_frict_damp * velocity.x
-
+	
 func _physics_process(delta):
 	if controllable:
-		velocity.y += gravity * delta
 		get_input()
+		if Input.is_action_pressed("ui_select") && dash:
+			dash = false
+			$DashTimer.start(0.08)
 		if jumping and is_on_floor():
 			jumping = false
+		if $DashTimer.time_left > 0:
+			if !$AnimatedSprite.flip_h:
+				velocity.x = 4 * run_speed
+			else:
+				velocity.x = -4 * run_speed
+			velocity.y = 0
+		else:
+			velocity.y += gravity * delta
+		if $CoyoteTimer.time_left > 0:
+			dash = true
 		velocity = move_and_slide(velocity, Vector2(0, -1))
 		if velocity.y > 800:
 			get_tree().reload_current_scene()
