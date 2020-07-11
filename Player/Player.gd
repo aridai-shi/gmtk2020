@@ -17,9 +17,16 @@ func get_input():
 	var horiz = Input.get_action_strength("ui_right") - Input.get_action_strength("ui_left")
 	if is_on_floor():
 		$CoyoteTimer.start(0.09)
-	if !jumping and $JumpBufferTimer.time_left > 0 and $CoyoteTimer.time_left > 0:
+	if is_on_wall() && velocity.y > 10:
+		velocity.y = velocity.y/3
+	if !jumping and $JumpBufferTimer.time_left > 0 && ($CoyoteTimer.time_left > 0||is_on_wall()):
 		jumping = true
 		velocity.y = jump_speed
+		if is_on_wall():
+			if $AnimatedSprite.flip_h:
+				velocity.x += run_speed*20
+			else:
+				velocity.x += run_speed*-20
 	if horiz > 0:
 		velocity.x += accel*run_speed
 		$AnimatedSprite.flip_h = false
