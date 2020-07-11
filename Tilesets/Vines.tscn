@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=2]
+[gd_scene load_steps=11 format=2]
 
 [ext_resource path="res://Tilesets/vines.png" type="Texture" id=1]
 
@@ -100,19 +100,9 @@ points = PoolVector2Array( 0, 0, 8, 0, 8, 8, 0, 8 )
 } ]
 0/z_index = 0
 
-[sub_resource type="GDScript" id=10]
-script/source = "extends TileMap
-
-
-func _ready():
-	pass
-"
-
 [node name="Vines" type="TileMap" groups=[
 "myurderer",
 ]]
 tile_set = SubResource( 9 )
 cell_size = Vector2( 8, 8 )
 format = 1
-tile_data = PoolIntArray( 0, 0, 0 )
-script = SubResource( 10 )
