@@ -9,7 +9,7 @@ func _physics_process(delta):
 	
 func Beat():
 	var beaty = time * BPM / 60
-	if beaty - floor(beaty) <= 0.2: 
+	if beaty - floor(beaty) <= get_physics_process_delta_time(): 
 		return true
 	else:
 		return false

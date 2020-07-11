@@ -14,7 +14,7 @@ func _ready():
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
-	if get_owner().get_node("./BeatPlayer").Beat():
+	if get_owner().get_parent().get_node("./BeatPlayer").Beat():
 		if toggle:
 			toggle = false
 		else:
