@@ -14,7 +14,7 @@ func _ready():
 func on_body_entered(body):
 	if "Player" in body.name:
 		body.velocity.y = -300
-		animation = "hit"
+		play("hit")
 	$Particles.emitting = true
 	$ParticleTimer.start()
 
@@ -23,4 +23,5 @@ func on_particle_timer_timeout():
 
 func _process(delta):
 	if animation == "hit" and playing == false:
-		animation = "idle"
+		frame = 0
+		play("idle")
