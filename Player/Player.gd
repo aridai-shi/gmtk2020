@@ -54,5 +54,7 @@ func _physics_process(delta):
 			dash = true
 		velocity = move_and_slide(velocity, Vector2(0, -1))
 		if velocity.y > 800:
-			get_tree().reload_current_scene()
-
+			var game = get_owner().get_parent()
+			game.transition_level(game.levellist[game.currentlevel])
+			visible = false
+			velocity.y = 0
