@@ -9,15 +9,14 @@ export (float) var accel = 0.075
 var velocity = Vector2()
 var jumping = false
 var dash = true;
-
-
+func _ready():
+		get_owner().get_parent().get_node("./BeatPlayer").connect("beat",self,"on_beat")
+func on_beat():
+	$JumpBufferTimer.start(0.15)
 func get_input():
-	print (get_owner().get_parent().get_node("BeatPlayer").Beat())
 	var horiz = Input.get_action_strength("ui_right") - Input.get_action_strength("ui_left")
 	if is_on_floor():
 		$CoyoteTimer.start(0.09)
-	if get_owner().get_parent().get_node("BeatPlayer").Beat():
-		$JumpBufferTimer.start(0.15)
 	if !jumping and $JumpBufferTimer.time_left > 0 and $CoyoteTimer.time_left > 0:
 		jumping = true
 		velocity.y = jump_speed
@@ -31,7 +30,7 @@ func get_input():
 		velocity.x = clamp(velocity.x, -run_speed, run_speed)
 	if horiz == 0:
 		velocity.x = h_frict_damp * velocity.x
-	
+
 func _physics_process(delta):
 	if controllable:
 		get_input()
