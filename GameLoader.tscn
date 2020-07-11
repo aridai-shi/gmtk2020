@@ -1,0 +1,13 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://BeatPlayer.tscn" type="PackedScene" id=1]
+[ext_resource path="res://BeatIndicator.tscn" type="PackedScene" id=2]
+[ext_resource path="res://GameLoader.gd" type="Script" id=3]
+
+[node name="GameLoader" type="Node"]
+script = ExtResource( 3 )
+
+[node name="BeatPlayer" parent="." instance=ExtResource( 1 )]
+autoplay = false
+
+[node name="BeatIndicator" parent="." instance=ExtResource( 2 )]
