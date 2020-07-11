@@ -9,7 +9,7 @@ func transition_level(level):
 	$BeatPlayer.stop()
 	ScreenWipe.value = 0
 	ScreenWipe.fill_mode = 2
-	ScreenTween.interpolate_property(ScreenWipe, "value", 0, 150, 1, Tween.TRANS_CUBIC, Tween.EASE_IN_OUT)
+	ScreenTween.interpolate_property(ScreenWipe, "value", 0, 150, 0.5, Tween.TRANS_CUBIC, Tween.EASE_IN)
 	ScreenTween.start()
 	yield(ScreenTween, "tween_completed")
 	load_level(level)
@@ -21,8 +21,8 @@ func load_level(level):
 				child.queue_free()
 	var levelscene = load(level[0]).instance()
 	add_child(levelscene)
-	ScreenWipe.fill_mode = 2
-	ScreenTween.interpolate_property(ScreenWipe, "value", 100, 0, 1, Tween.TRANS_CUBIC, Tween.EASE_IN_OUT)
+	ScreenWipe.fill_mode = 3
+	ScreenTween.interpolate_property(ScreenWipe, "value", 100, 0, 0.5, Tween.TRANS_CUBIC, Tween.EASE_IN)
 	ScreenTween.start()
 	yield(ScreenTween, "tween_completed")
 	$BeatPlayer.stream = level[1]
