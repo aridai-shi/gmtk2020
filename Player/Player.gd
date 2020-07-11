@@ -12,10 +12,11 @@ var dash = true;
 
 
 func get_input():
+	print (get_owner().get_parent().get_node("BeatPlayer").Beat())
 	var horiz = Input.get_action_strength("ui_right") - Input.get_action_strength("ui_left")
 	if is_on_floor():
 		$CoyoteTimer.start(0.09)
-	if get_node("../BeatPlayer").Beat():
+	if get_owner().get_parent().get_node("BeatPlayer").Beat():
 		$JumpBufferTimer.start(0.15)
 	if !jumping and $JumpBufferTimer.time_left > 0 and $CoyoteTimer.time_left > 0:
 		jumping = true
