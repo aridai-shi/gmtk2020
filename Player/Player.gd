@@ -15,18 +15,9 @@ func get_input():
 	var horiz = Input.get_action_strength("ui_right") - Input.get_action_strength("ui_left")
 	if is_on_floor():
 		$CoyoteTimer.start(0.09)
-	if is_on_wall() && velocity.y > 10:
-		velocity.y = velocity.y/3
-	if !jumping and $JumpBufferTimer.time_left > 0 && ($CoyoteTimer.time_left > 0||is_on_wall()):
+	if !jumping and $JumpBufferTimer.time_left > 0 && $CoyoteTimer.time_left > 0:
 		jumping = true
-		if !is_on_wall():
-			velocity.y = jump_speed
-		else:
-			if $AnimatedSprite.flip_h:
-				velocity.x += run_speed*20
-			else:
-				velocity.x += run_speed*-20
-			velocity.y = jump_speed * 0.88
+		velocity.y = jump_speed
 	if horiz > 0:
 		velocity.x += accel*run_speed
 		$AnimatedSprite.flip_h = false
@@ -48,10 +39,10 @@ func _physics_process(delta):
 			dash = false
 			$DashTimer.start(0.05)
 			$CoolTimer.start(0.5)
-		if jumping and (is_on_wall() or is_on_floor()):
+		if jumping and is_on_floor():
 			jumping = false
-		if velocity.y > 400:
-			velocity.y = 400
+		if velocity.y > 300:
+			velocity.y = 300
 		if $DashTimer.time_left > 0:
 			if !$AnimatedSprite.flip_h:
 				velocity.x = 4 * run_speed
