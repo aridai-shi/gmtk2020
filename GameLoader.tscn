@@ -9,6 +9,7 @@
 script = ExtResource( 3 )
 
 [node name="BeatPlayer" parent="." instance=ExtResource( 1 )]
+volume_db = 1.0
 autoplay = false
 
 [node name="BeatIndicator" parent="." instance=ExtResource( 2 )]
