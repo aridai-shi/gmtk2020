@@ -68,7 +68,7 @@ texture = ExtResource( 12 )
 
 [node name="ColorRect" type="ColorRect" parent="CanvasLayer"]
 modulate = Color( 1, 1, 1, 0.670588 )
-self_modulate = Color( 0.266667, 0.305882, 0.6, 1 )
+self_modulate = Color( 0.219608, 0.270588, 0.654902, 1 )
 show_behind_parent = true
 material = SubResource( 1 )
 margin_right = 1280.0
