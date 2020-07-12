@@ -33,9 +33,10 @@ func on_beat():
 func _physics_process(delta):
 	if controllable:
 		get_input()
+		$Camera2D.position.y = 20
 		if $Camera2D.global_position.y > 80:
 			$Camera2D.global_position.y = 80
-		if $CoolTimer.time_left <= 0 && Input.is_action_pressed("ui_select") && dash:
+		if get_owner().get_parent().currentlevel == 2 && $CoolTimer.time_left <= 0 && Input.is_action_pressed("ui_select") && dash:
 			dash = false
 			$DashTimer.start(0.05)
 			$CoolTimer.start(0.5)
