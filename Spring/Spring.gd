@@ -12,9 +12,11 @@ func _ready():
 	connect("animation_finished", self, "on_animation_finished")
 
 func on_body_entered(body):
-	if "Player" in body.name || "Chestie" in body.name:
+	if "Player" in body.name:
 		body.velocity.y = -300
-		play("hit")
+	if "Chestie" in body.name:
+		body.velocity.y = -250
+	play("hit")
 	$Particles.emitting = true
 	$ParticleTimer.start()
 
