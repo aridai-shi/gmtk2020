@@ -1,18 +1,30 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=14 format=2]
 
-[ext_resource path="res://icon.png" type="Texture" id=1]
+[ext_resource path="res://Player/Animations/idle/idle3.png" type="Texture" id=1]
 [ext_resource path="res://Player/Player.gd" type="Script" id=2]
 [ext_resource path="res://Player/dash-dust.png" type="Texture" id=3]
+[ext_resource path="res://Player/Animations/walk/walk2.png" type="Texture" id=4]
+[ext_resource path="res://Player/Animations/idle/idle4.png" type="Texture" id=5]
+[ext_resource path="res://Player/Animations/walk/walk4.png" type="Texture" id=6]
+[ext_resource path="res://Player/Animations/walk/walk3.png" type="Texture" id=7]
+[ext_resource path="res://Player/Animations/idle/idle1.png" type="Texture" id=8]
+[ext_resource path="res://Player/Animations/walk/walk1.png" type="Texture" id=9]
+[ext_resource path="res://Player/Animations/idle/idle2.png" type="Texture" id=10]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 4, 9.5204 )
 
 [sub_resource type="SpriteFrames" id=2]
 animations = [ {
-"frames": [ ExtResource( 1 ) ],
+"frames": [ ExtResource( 8 ), ExtResource( 10 ), ExtResource( 1 ), ExtResource( 5 ) ],
 "loop": true,
 "name": "idle",
 "speed": 10.0
+}, {
+"frames": [ ExtResource( 9 ), ExtResource( 4 ), ExtResource( 7 ), ExtResource( 6 ) ],
+"loop": true,
+"name": "walk",
+"speed": 15.0
 } ]
 
 [sub_resource type="ParticlesMaterial" id=3]
@@ -44,9 +56,10 @@ smoothing_speed = 10.0
 
 [node name="AnimatedSprite" type="AnimatedSprite" parent="."]
 position = Vector2( -0.367374, 4.54074 )
-scale = Vector2( 0.126733, 0.27632 )
+scale = Vector2( 0.77, 0.7 )
 frames = SubResource( 2 )
-animation = "idle"
+animation = "walk"
+frame = 1
 playing = true
 
 [node name="JumpBufferTimer" type="Timer" parent="."]
