@@ -28,6 +28,9 @@ func get_input():
 		velocity.x = clamp(velocity.x, -run_speed, run_speed)
 	if horiz == 0:
 		velocity.x = h_frict_damp * velocity.x
+		$AnimatedSprite.play("idle")
+	else:
+		$AnimatedSprite.play("walk")
 func on_beat():
 		$JumpBufferTimer.start(0.15)
 func _physics_process(delta):
