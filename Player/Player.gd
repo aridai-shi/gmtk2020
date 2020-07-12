@@ -1,7 +1,7 @@
 extends KinematicBody2D
 
-export (int) var run_speed = 175
-export (int) var jump_speed = -200
+export (int) var run_speed = 145
+export (int) var jump_speed = -220
 export (int) var gravity = 650
 export (bool) var controllable = true
 export (float) var h_frict_damp = 0.2
@@ -33,8 +33,8 @@ func on_beat():
 func _physics_process(delta):
 	if controllable:
 		get_input()
-		if $Camera2D.global_position.y > 100:
-			$Camera2D.global_position.y = 100
+		if $Camera2D.global_position.y > 80:
+			$Camera2D.global_position.y = 80
 		if $CoolTimer.time_left <= 0 && Input.is_action_pressed("ui_select") && dash:
 			dash = false
 			$DashTimer.start(0.05)

@@ -6,6 +6,7 @@ var levellist = [["res://Levels/Level1.tscn",load("res://Music/track1.ogg"), 60]
 func _ready():
 	load_level(levellist[0])
 func transition_level(level):
+	tween_indicator()
 	$BeatPlayer.stop()
 	ScreenWipe.value = 0
 	ScreenWipe.fill_mode = 2
@@ -20,6 +21,7 @@ func load_level(level):
 			if child.filename == level[0]:
 				child.queue_free()
 	var levelscene = load(level[0]).instance()
+	$BeatIndicator/Filler.visible = true
 	add_child(levelscene)
 	ScreenWipe.fill_mode = 3
 	ScreenTween.interpolate_property(ScreenWipe, "value", 100, 0, 0.5, Tween.TRANS_CUBIC, Tween.EASE_IN)
@@ -29,3 +31,14 @@ func load_level(level):
 	$BeatPlayer.play()
 	$BeatPlayer.BPM = level[2]
 	currentlevel = levellist.find(level)
+
+func tween_indicator() -> void:
+		$BeatIndicator/Filler.modulate = Color("D83639")
+		var b = Vector2(min(0.15, $BeatIndicator/Filler.scale.x), min(0.15, $BeatIndicator/Filler.scale.x))
+		$BeatIndicator/Tween.interpolate_property($BeatIndicator/Filler, "scale",b , Vector2.ZERO, 0.3, Tween.TRANS_CUBIC, Tween.EASE_IN)
+		$BeatIndicator/Tween.interpolate_property($BeatIndicator/Filler, "modulate", Color("D83639"),Color.black, 0.3, Tween.TRANS_CUBIC, Tween.EASE_IN)
+		$BeatIndicator/Tween.start()
+		yield($BeatIndicator/Tween, "tween_completed")
+		print(ScreenWipe.value)
+		if ScreenWipe.value > 0:
+			$BeatIndicator/Filler.visible = false
