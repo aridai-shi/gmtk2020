@@ -17,7 +17,7 @@ func _ready():
 	get_owner().get_parent().get_node("./BeatPlayer").connect("beat",self,"on_beat")
 
 func on_beat():
-	$GeyserTimer.start(0.5)
+	$GeyserTimer.start(0.5*get_owner().get_parent().get_node("./BeatPlayer").BPM/120)
 
 
 
