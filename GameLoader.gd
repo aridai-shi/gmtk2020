@@ -2,9 +2,9 @@ extends Node
 onready var ScreenWipe = $ScreenWipe/Rect
 onready var ScreenTween = $ScreenWipe/Tween
 var currentlevel = 0
-var levellist = [["res://Levels/Level1.tscn",load("res://Music/track1.ogg"), 60],["res://Levels/Level2.tscn",load("res://Music/placeholder.ogg"), 79.5]]
+var levellist = [["res://Levels/Level1.tscn",load("res://Music/track1.ogg"), 60],["res://Levels/Level2.tscn",load("res://Music/track2.ogg"), 79.5], ["res://Levels/Level3.tscn",load("res://Music/track2.ogg"), 79.5]]
 func _ready():
-	load_level(levellist[0])
+	load_level(levellist[2])
 func transition_level(level):
 	tween_indicator()
 	$BeatPlayer.stop()
@@ -39,6 +39,5 @@ func tween_indicator() -> void:
 		$BeatIndicator/Tween.interpolate_property($BeatIndicator/Filler, "modulate", Color("D83639"),Color.black, 0.3, Tween.TRANS_CUBIC, Tween.EASE_IN)
 		$BeatIndicator/Tween.start()
 		yield($BeatIndicator/Tween, "tween_completed")
-		print(ScreenWipe.value)
 		if ScreenWipe.value > 0:
 			$BeatIndicator/Filler.visible = false

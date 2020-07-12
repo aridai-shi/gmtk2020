@@ -32,14 +32,18 @@ func on_beat():
 		$JumpBufferTimer.start(0.15)
 func animations():
 	var horiz = Input.get_action_strength("ui_right") - Input.get_action_strength("ui_left")
+	var anim
 	if is_on_floor():
 		if horiz == 0:
 			velocity.x = h_frict_damp * velocity.x
-			$AnimatedSprite.play("idle")
+			anim = "idle"
 		else:
-			$AnimatedSprite.play("walk")
+			anim = "walk"
 	else:
-		$AnimatedSprite.play("jump")
+		anim = "jump"
+	if !dash && get_owner().get_parent().currentlevel == 2:
+		anim += "-d"
+	$AnimatedSprite.play(anim)
 func _physics_process(delta):
 	if controllable:
 		get_input()
