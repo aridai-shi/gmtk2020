@@ -17,10 +17,4 @@ func _physics_process(delta):
 func GiveBeatCalc():
 	var beaty = time * BPM / 60
 	return float(beaty - floor(beaty))
-func _ready():
-	if "placeholder" in stream.resource_path: 
-		print ("WARNING: Forgot to add a song to the level, ya dingus. Song is now \"placeholder.ogg\"")
-	if BPM == null:
-		print ("WARNING: Forgot to set BPM, ya dunce. Setting to 60.")
-	if !playing:
-		return
+
