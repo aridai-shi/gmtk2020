@@ -28,14 +28,22 @@ func get_input():
 		velocity.x = clamp(velocity.x, -run_speed, run_speed)
 	if horiz == 0:
 		velocity.x = h_frict_damp * velocity.x
-		$AnimatedSprite.play("idle")
-	else:
-		$AnimatedSprite.play("walk")
 func on_beat():
 		$JumpBufferTimer.start(0.15)
+func animations():
+	var horiz = Input.get_action_strength("ui_right") - Input.get_action_strength("ui_left")
+	if is_on_floor():
+		if horiz == 0:
+			velocity.x = h_frict_damp * velocity.x
+			$AnimatedSprite.play("idle")
+		else:
+			$AnimatedSprite.play("walk")
+	else:
+		$AnimatedSprite.play("jump")
 func _physics_process(delta):
 	if controllable:
 		get_input()
+		animations()
 		$Camera2D.position.y = 20
 		if $Camera2D.global_position.y > 80:
 			$Camera2D.global_position.y = 80

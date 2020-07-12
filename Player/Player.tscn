@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=2]
+[gd_scene load_steps=15 format=2]
 
 [ext_resource path="res://Player/Animations/idle/idle3.png" type="Texture" id=1]
 [ext_resource path="res://Player/Player.gd" type="Script" id=2]
@@ -10,6 +10,7 @@
 [ext_resource path="res://Player/Animations/idle/idle1.png" type="Texture" id=8]
 [ext_resource path="res://Player/Animations/walk/walk1.png" type="Texture" id=9]
 [ext_resource path="res://Player/Animations/idle/idle2.png" type="Texture" id=10]
+[ext_resource path="res://Player/Animations/jump/jump3.png" type="Texture" id=11]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 4, 9.5204 )
@@ -25,6 +26,11 @@ animations = [ {
 "loop": true,
 "name": "walk",
 "speed": 15.0
+}, {
+"frames": [ ExtResource( 11 ) ],
+"loop": false,
+"name": "jump",
+"speed": 10.0
 } ]
 
 [sub_resource type="ParticlesMaterial" id=3]
@@ -58,8 +64,7 @@ smoothing_speed = 10.0
 position = Vector2( -0.367374, 4.54074 )
 scale = Vector2( 0.77, 0.7 )
 frames = SubResource( 2 )
-animation = "walk"
-frame = 1
+animation = "jump"
 playing = true
 
 [node name="JumpBufferTimer" type="Timer" parent="."]
