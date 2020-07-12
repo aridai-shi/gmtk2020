@@ -4,7 +4,6 @@ var killpos = Vector2.ZERO
 export (bool) var Shelled = false
 func _ready():
 	killpos.y = $KillArea.position.y
-	print (killpos)
 func _physics_process(delta):
 	if $AnimatedSprite.flip_h:
 		velocity.x = 30

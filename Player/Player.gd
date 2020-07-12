@@ -9,10 +9,7 @@ export (float) var accel = 0.075
 var velocity = Vector2()
 var jumping = false
 var dash = true;
-func _ready():
-		get_owner().get_parent().get_node("./BeatPlayer").connect("beat",self,"on_beat")
-func on_beat():
-	$JumpBufferTimer.start(0.15)
+
 func get_input():
 	var horiz = Input.get_action_strength("ui_right") - Input.get_action_strength("ui_left")
 	if is_on_floor():
@@ -21,12 +18,14 @@ func get_input():
 		velocity.y = velocity.y/3
 	if !jumping and $JumpBufferTimer.time_left > 0 && ($CoyoteTimer.time_left > 0||is_on_wall()):
 		jumping = true
-		velocity.y = jump_speed
-		if is_on_wall():
+		if !is_on_wall():
+			velocity.y = jump_speed
+		else:
 			if $AnimatedSprite.flip_h:
 				velocity.x += run_speed*20
 			else:
 				velocity.x += run_speed*-20
+			velocity.y = jump_speed * 0.88
 	if horiz > 0:
 		velocity.x += accel*run_speed
 		$AnimatedSprite.flip_h = false
@@ -41,13 +40,16 @@ func get_input():
 func _physics_process(delta):
 	if controllable:
 		get_input()
+		var beaty = get_owner().get_parent().get_node("./BeatPlayer").GiveBeatCalc()
+		if beaty <= 0.2: 
+			$JumpBufferTimer.start(0.15)
 		if $Camera2D.global_position.y > 100:
 			$Camera2D.global_position.y = 100
 		if $CoolTimer.time_left <= 0 && Input.is_action_pressed("ui_select") && dash:
 			dash = false
 			$DashTimer.start(0.05)
 			$CoolTimer.start(0.5)
-		if jumping and is_on_floor():
+		if jumping and (is_on_wall() or is_on_floor()):
 			jumping = false
 		if $DashTimer.time_left > 0:
 			if !$AnimatedSprite.flip_h:
