@@ -42,4 +42,5 @@ func _on_KillArea_body_entered(body):
 func _on_BounceArea_body_entered(body):
 	if "Player" in body.name:
 		body.velocity.y = -300
+		body.dash = true;
 		dead = true

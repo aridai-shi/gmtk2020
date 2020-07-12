@@ -2,7 +2,7 @@ extends Node
 onready var ScreenWipe = $ScreenWipe/Rect
 onready var ScreenTween = $ScreenWipe/Tween
 var currentlevel = 0
-var levellist = [["res://Levels/Level1.tscn",load("res://Music/track1.ogg"), 60],["res://Levels/Level2.tscn",load("res://Music/track2.ogg"), 79.5], ["res://Levels/Level3.tscn",load("res://Music/track2.ogg"), 79.5]]
+var levellist = [["res://Levels/Level1.tscn",load("res://Music/track1.ogg"), 60],["res://Levels/Level2.tscn",load("res://Music/track2.ogg"), 79.5], ["res://Levels/Level3.tscn",load("res://Music/track3.ogg"), 79.5], ["res://Levels/Bluh.tscn",load("res://Music/track3.ogg"), 79.5]]
 func _ready():
 	load_level(levellist[2])
 func transition_level(level):

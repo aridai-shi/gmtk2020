@@ -14,6 +14,7 @@ func _ready():
 func on_body_entered(body):
 	if "Player" in body.name:
 		body.velocity.y = -300
+		body.dash = true;
 	if "Chestie" in body.name:
 		body.velocity.y = -250
 	play("hit")
