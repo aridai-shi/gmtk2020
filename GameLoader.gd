@@ -2,9 +2,9 @@ extends Node
 onready var ScreenWipe = $ScreenWipe/Rect
 onready var ScreenTween = $ScreenWipe/Tween
 var currentlevel = 0
-var levellist = [["res://Levels/Level1.tscn",load("res://Music/track1.ogg"), 60]]
+var levellist = [["res://Levels/Level1.tscn",load("res://Music/track1.ogg"), 60],["res://Levels/Level2.tscn",load("res://Music/placeholder.ogg"), 79.5]]
 func _ready():
-	load_level(levellist[0])
+	load_level(levellist[1])
 func transition_level(level):
 	tween_indicator()
 	$BeatPlayer.stop()
